@@ -1,0 +1,567 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XB3PR2Y1TQ"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-XB3PR2Y1TQ');
+    </script>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>GALA3D: Towards Complex Text-to-3D Generation via Generative Layout-guided Gaussian Splatting</title>
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/css/bootstrap.min.css">
+    <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,500,600' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="assets/css/Highlight-Clean.css">
+    <link rel="stylesheet" href="assets/css/styles.css">
+    <link rel="icon" href="./static/icon.png">
+
+
+    <meta property="og:site_name" content="GALA3D" />
+    <meta property="og:type" content="video.other" />
+    <meta property="og:title" content="GALA3D: Towards Complex Text-to-3D Generation via Generative Layout-guided Gaussian Splatting" />
+    <meta property="og:description" content="GALA3D: Towards Complex Text-to-3D Generation via Generative Layout-guided Gaussian Splatting, 2023." />
+    <meta property="og:url" content="" />
+
+    <script src="assets/js/video_comparison.js"></script>
+    <script type="module" src="https://unpkg.com/@google/model-viewer@2.0.1/dist/model-viewer.min.js"></script>
+</head>
+
+
+<body>
+    <!-- <div class="video-compare-container" style="width: 100%; display: flex; flex-direction: column; align-items: center;">
+        <h6 class="caption" style="margin-bottom: 10px;">A living room has a coffee table with a basket on it, a wooden floor, a TV on a TV stand, and a sofa with an astronaut sitting on it</h6>
+        <video class="video lazy" loop playsinline autoplay muted style="width: 30%;">
+            <source data-src="static/top.mp4" type="video/mp4"></source>
+        </video>
+    </div> -->
+    <div class="container" style="max-width: 768px;">
+        <div class="row captioned_videos">
+            <div class="col-4">
+                <div class="video-comare-container" style="width: 100%">
+                    <h6 class="caption">A living room has a coffee table with a basket on it, a wooden floor, a TV on a TV stand, and a sofa with an astronaut sitting on it</h6>
+                    <video class="video lazy" loop playsinline autoplay muted style="width: 100%">
+                        <source data-src="./top/1.mp4" type="video/mp4"></source>
+                    </video>
+                </div>
+            </div>
+            <div class="col-4">
+                <div class="video-comare-container" style="width: 100%">
+                    <h6 class="caption">A table with a roasted turkey, a salad, a loaf of French bread, a glass of orange juice and an empty plate</h6>
+                    <video class="video lazy" loop playsinline autoplay muted style="width: 100%">
+                        <source data-src="./top/2.mp4" type="video/mp4"></source>
+                    </video>
+                </div>
+            </div>
+            <div class="col-4">
+                <div class="video-comare-container" style="width: 100%">
+                    <h6 class="caption">Panda in a wizard hat sitting on a Victorian-style wooden chair and looking at a Ficus in a pot</h6>
+                    <video class="video lazy" loop playsinline autoplay muted style="width: 100%">
+                        <source data-src="./top/3.mp4" type="video/mp4"></source>
+                    </video>
+                </div>
+            </div>
+    </div>
+    
+    <div class="highlight-clean" style="padding-bottom: 10px;">
+        <div class="container" style="max-width: 1024px; margin-bottom: 20px;">
+            <h1 class="text-center"><b>GALA3D</b>:  Towards Complex Text-to-3D Generation via Generative Layout-guided Gaussian Splatting</h1>
+        </div>
+
+
+        <div class="container" style="max-width: 980px; margin-bottom: 20px;">
+            <div class="row authors">
+                <div class="col">
+                    <!-- <h5 class="text-center" style="text-align: center">Authors anonymized</h5> -->
+                    <div class="text-center">
+                            <span class="author-block" style="font-size: 20px;">
+                            <a href="https://scholar.google.com/citations?user=WLE4TUoAAAAJ&hl=zh-CN">Xiaoyu Zhou</a><sup>1</sup>,</span>
+                            <span class="author-block" style="font-size: 20px;">
+                            <a href="https://orcid.org/0009-0002-4014-0705">Xingjian Ran</a><sup>1</sup>,</span>
+                            <span class="author-block" style="font-size: 20px;">
+                            <a href="https://orcid.org/0009-0001-9464-5314">XiongYajiao</a><sup>1</sup>,</span>
+                          <span class="author-block" style="font-size: 20px;">
+                          <a href="https://orcid.org/0009-0001-7547-3692">Jinlin He</a><sup>1</sup>,</span>
+                          <span class="author-block" style="font-size: 20px;">
+                          <a href="https://scholar.google.com/citations?user=ClU7ua0AAAAJ&hl=zh-CN">Zhiwei Lin</a><sup>1</sup>,</span>
+                        <span class="author-block" style="font-size: 20px;">
+                          <a href="https://scholar.google.com/citations?user=Zna90HQAAAAJ&hl=zh-CN">Yongtao Wang</a><sup>1</sup>,</span>
+                    </div>
+                    <div class="text-center">
+                    
+                        <!-- <p></p> -->
+                        <span class="author-block" style="font-size: 20px;">
+
+                          <a href="https://deqings.github.io/">Deqing Sun</a><sup>2</sup>,
+                        </span>
+                        <span class="author-block" style="font-size: 20px;">
+
+                          <a href="https://faculty.ucmerced.edu/mhyang/">Ming-Hsuan Yang</a><sup>2,3</sup>
+                        </span>
+                      </div>
+            
+                      <div class="text-center">
+                        <span class="author-block"><sup>1</sup>Wangxuan Institute of Computer Technology, Peking University</span>
+                        <!-- <span class="author-block"><sup>2</sup>Huawei Inc.</span> -->
+                        <!-- <p></p> -->
+                      </div>
+                        <div class="text-center">
+                        <span class="author-block"><sup>2</sup>Google Research</span>
+                        <span class="author-block"><sup>3</sup>University of California, Merced</span>
+                    </div>
+                </div>
+            </div>
+            <div class="buttons" style="margin-top: 8px; margin-bottom: 8px;">
+                <a class="btn btn-light" role="button" href="https://gala3d.github.io/">
+                    <svg style="width:24px;height:24px;margin-left:-12px;margin-right:12px" viewBox="0 0 24 24">
+                        <path fill="currentColor" d="M16 0H8C6.9 0 6 .9 6 2V18C6 19.1 6.9 20 8 20H20C21.1 20 22 19.1 22 18V6L16 0M20 18H8V2H15V7H20V18M4 4V22H20V24H4C2.9 24 2 23.1 2 22V4H4M10 10V12H18V10H10M10 14V16H15V14H10Z"></path>
+                    </svg>Paper
+                </a>
+                <a class="btn btn-light" role="button" href="https://gala3d.github.io/">
+                    <svg xmlns="http://www.w3.org/2000/svg" style="width:24px;height:24px;margin-left:-12px;margin-right:12px" viewBox="0 0 24 24">
+                        <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 
+                                1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 
+                                3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 
+                                2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"></path>
+                    </svg>
+                    Code is coming soon
+                </a>
+                <a class="btn btn-light" role="button" href="https://gala3d.github.io/">
+                    Huggingface demo is coming soon
+                </a>
+            </div>
+    </div>
+
+    <hr class="divider" />
+
+    <div class="container" style="max-width: 768px;">
+        <div class="row">
+            <div class="col-md-12">
+                <h2>Abstract</h2>
+                <p>
+                    In this paper, we propose a generative 3D Gaussians with Layout-guided control, GALA3D, for effective compositional text-to-3D generation in a user-friendly way. To this end, we utilize large language models (LLMs) for generating initial layout descriptions and introduce a layout-guided 3D Gaussian representation for 3D content generation with adaptive geometric constraints. We then propose an object-scene compositional optimization mechanism with conditioned diffusion to collaboratively generate realistic 3D scenes with consistent geometry, texture, scale, and accurate interactions among multiple objects while simultaneously adjusting the coarse layout priors extracted from the LLMs to align with the generated scene. Experiments show that GALA3D presents a user-friendly, end-to-end framework for state-of-the-art scene-level 3D content generation and controllable editing while ensuring the high fidelity of object-level entities within the scene. Source codes and models will be available.
+                </p>
+            </div>
+        </div>
+    </div>
+    <div class="container" style="max-width: 768px;">
+        <div class="row captioned_videos">
+            <div class="col-md-12">
+                <img src="static/teaser.png" alt="architecture" style="width: 100%">
+                
+            </div>
+        </div>
+    </div>
+
+    <div class="container" style="max-width: 768px;">
+        <div class="row">
+            <div class="col-md-12">
+                <h2>Framework</h2>
+                <p>
+                    Overall framework of GALA3D. Given a textual description, GALA3D first creates a coarse layout using LLMs. The layout is then utilized to construct the Layout-guided Gaussian Representation, incorporating Adaptive Geometry Control to constrain the Gaussians' geometric shape and spatial distribution. Subsequently, Compositional Diffusions are employed to optimize the 3D Gaussians using text-to-image priors compositionally. Simultaneously, the Layout Refinement module refines the initial layout provided by LLMs, enabling a better adherence to real-world scene constraints.
+                </p>
+            </div>
+        </div>
+    </div>
+    <div class="container" style="max-width: 768px;">
+        <div class="row captioned_videos">
+            <div class="col-md-12">
+                <img src="static/framework.png" alt="architecture" style="width: 100%">
+
+            </div>
+        </div>
+    </div>
+
+
+    <!-- <hr class="divider" /> -->
+    <!-- <div class="container" style="max-width: 768px;">
+        <div class="row">
+            <div class="col-md-12">
+                <h2>Training Process</h2>
+                <p>A 3D instance can be generated within 15 minutes on one GPU, much faster than previous methods, and can be directly rendered in real time.</p>
+            </div>
+        </div>
+        <div class="compositional captioned_videos" style="display: flex; justify-content: center;">
+            <video class="video lazy" autoplay loop playsinline muted style="width: 60%;">
+                <source data-src="static/output_gs_1124.webm" type="video/mp4"></source>
+            </video>
+            <video class="video lazy" autoplay loop playsinline muted style="width: 60%;">
+                <source data-src="static/output_ax_1124.webm" type="video/mp4"></source>
+            </video>
+        </div>
+    </div> -->
+
+
+    <!-- <hr class="divider" />
+    <div class="container" style="max-width: 768px;">
+        <div class="row">
+            <div class="col-sm-12">
+                <h2>Video</h2>
+            </div>
+
+            <div class="container" style="max-width: 768px;">
+                <div class="row captioned_videos">
+                    <div class="col-md-12">
+                        <div style="position:relative;padding-top:56.25%;">
+                            <iframe src="https://www.youtube.com/embed/GNzlUdQ1RBQ" allowfullscreen style="position:absolute;top:0;left:0;width:100%;height:100%;"></iframe>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div> -->
+
+    
+
+    <hr class="divider" />
+    <div class="container" style="max-width: 768px;">
+        <div class="row">
+            <div class="col-sm-12">
+                <h2>Comparison Results</h2>
+                <p>Qualitative comparisons between our method and <a href="https://dreamgaussian.github.io/">DreamGaussian</a>, <a href="https://taoranyi.com/ gaussiandreamer/">GaussianDreamer</a>, <a href="https://github.com/eladrich/latent-nerf">Latent-NeRF</a>, <a href="https://luciddreamer-cvlab.github.io/">LucidDreamer</a>,<a href="https://github.com/bytedance/MVDream">MVDream</a>,<a href="https://github.com/DanaCohen95/Set-the-Scene">Set-the-Scene</a>,<a href="https://pals.ttic.edu/p/score-jacobian-chaining">SJC</a>,<a href="https://gsgen3d.github.io/">GSGEN</a> and <a href="https://ml.cs.tsinghua.edu.cn/prolificdreamer/">ProlificDreamer</a>.</a></p>
+            </div>
+
+            <div class="container" style="max-width: 768px;">
+                <div class="row captioned_videos">
+                    <div class="col-md-12">
+                        <img src="static/compare.png" alt="architecture" style="width: 100%">
+                    </div>
+                </div>
+            </div>
+            <!-- <div class="container" style="max-width: 768px;">
+                <div class="row captioned_videos">
+                    <div class="col-md-12">
+                        <video class="video lazy" loop playsinline autoplay muted style="width: 100%">
+                            <source data-src="./static/onlycom.mp4" type="video/mp4"></source>
+                        </video>
+                    </div>
+                </div>
+            </div> -->
+        </div>
+    </div>
+
+    <hr class="divider" />
+    <div class="container" style="max-width: 768px;">
+        <div class="row">
+            <div class="col-sm-12">
+                <h2>More Generated Samples</h2>
+                <p>More generated samples by our GALA3D.</p>
+            </div>
+        </div>
+        <div class="row captioned_videos">
+            <!-- <div class="col-4">
+                <div class="video-compare-container" style="width: 100%">
+                    <video class="video lazy" loop playsinline autoplay muted style="width: 100%">
+                        <source data-src="dowm/astronaut_horse.mp4" type="video/mp4"></source>
+                    </video>
+                    <h6 class="caption">An astronaut riding a horse</h6>
+                </div>
+                
+            </div> -->
+            <div class="col-4">
+                <div class="video-compare-container" style="width: 100%">
+                    <video class="video lazy" loop playsinline autoplay muted style="width: 100%">
+                        <source data-src="dowm/ball.mp4" type="video/mp4"></source>
+                    </video>
+                    <h6 class="caption">There is a rugby ball, volleyball and crystal ball</h6>
+                </div>
+                
+            </div>
+            <div class="col-4">
+                <div class="video-compare-container" style="width: 100%">
+                    <video class="video lazy" loop playsinline autoplay muted style="width: 100%">
+                        <source data-src="dowm/bear.mp4" type="video/mp4"></source>
+                    </video>
+                    <h6 class="caption">A bear in a bowler hat pushing a cart</h6>
+                </div>
+                
+            </div>
+            <div class="col-4">
+                <div class="video-compare-container" style="width: 100%">
+                    <video class="video lazy" loop playsinline autoplay muted style="width: 100%">
+                        <source data-src="dowm/bedroom.mp4" type="video/mp4"></source>
+                    </video>
+                    <h6 class="caption">A bedroom with a bed, two wooden nightstands, a square wooden table with a table lamp on it, and a wooden wardrobe</h6>
+                </div>
+                
+            </div>
+            <div class="col-4">
+                <div class="video-compare-container" style="width: 100%">
+                    <video class="video lazy" loop playsinline autoplay muted style="width: 100%">
+                        <source data-src="dowm/cat.mp4" type="video/mp4"></source>
+                    </video>
+                    <h6 class="caption">A cat lies on a plank of wood suspended from two balloons</h6>
+                </div>
+                
+            </div>
+            <div class="col-4">
+                <div class="video-compare-container" style="width: 100%">
+                    <video class="video lazy" loop playsinline autoplay muted style="width: 100%">
+                        <source data-src="dowm/chess.mp4" type="video/mp4"></source>
+                    </video>
+                    <h6 class="caption">Chess is on the table next to two stones</h6>
+                </div>
+                
+            </div>
+            <!-- <div class="col-4">
+                <div class="video-compare-container" style="width: 100%">
+                    <video class="video lazy" loop playsinline autoplay muted style="width: 100%">
+                        <source data-src="dowm/comp3d1.mp4" type="video/mp4"></source>
+                    </video>
+                    <h6 class="caption">A tent on the grassland with a campfire next to it</h6>
+                </div>
+                
+            </div> -->
+            <div class="col-4">
+                <div class="video-compare-container" style="width: 100%">
+                    <video class="video lazy" loop playsinline autoplay muted style="width: 100%">
+                        <source data-src="dowm/comp3d2.mp4" type="video/mp4"></source>
+                    </video>
+                    <h6 class="caption">A Victorian style wooden chair on an oak floor with a Ficus in a pot next to it</h6>
+                </div>
+                
+            </div>
+            <div class="col-4">
+                <div class="video-compare-container" style="width: 100%">
+                    <video class="video lazy" loop playsinline autoplay muted style="width: 100%">
+                        <source data-src="dowm/dog.mp4" type="video/mp4"></source>
+                    </video>
+                    <h6 class="caption">A puppy lying on the iron plate on the top of Great Pyramid</h6>
+                </div>
+            </div>
+
+            
+            <div class="col-4">
+                <div class="video-compare-container" style="width: 100%">
+                    <video class="video lazy" loop playsinline autoplay muted style="width: 100%">
+                        <source data-src="dowm/food.mp4" type="video/mp4"></source>
+                    </video>
+                    <h6 class="caption">A table with a hamburger, a bread, an order of fries, and a cup of Coke</h6>
+                </div>
+                
+            </div>
+            <div class="col-4">
+                <div class="video-compare-container" style="width: 100%">
+                    <video class="video lazy" loop playsinline autoplay muted style="width: 100%">
+                        <source data-src="dowm/food2.mp4" type="video/mp4"></source>
+                    </video>
+                    <h6 class="caption">A table with a roasted turkey, a salad, a loaf of French bread, a glass of orange juice and an empty plate</h6>
+                </div>
+                
+            </div>
+            <div class="col-4">
+                <div class="video-compare-container" style="width: 100%">
+                    <video class="video lazy" loop playsinline autoplay muted style="width: 100%">
+                        <source data-src="dowm/grassland.mp4" type="video/mp4"></source>
+                    </video>
+                    <h6 class="caption">A camping scene with a tent on the grassland and two benches next to a campfire</h6>
+                </div>
+                
+            </div>
+            <div class="col-4">
+                <div class="video-compare-container" style="width: 100%">
+                    <video class="video lazy" loop playsinline autoplay muted style="width: 100%">
+                        <source data-src="dowm/hamburger.mp4" type="video/mp4"></source>
+                    </video>
+                    <h6 class="caption">A hamburger on a plate on a stool</h6>
+                </div>
+                
+            </div>
+            <div class="col-4">
+                <div class="video-compare-container" style="width: 100%">
+                    <video class="video lazy" loop playsinline autoplay muted style="width: 100%">
+                        <source data-src="dowm/kitchen.mp4" type="video/mp4"></source>
+                    </video>
+                    <h6 class="caption">A kitchen with a kitchen stove, a range hood, a refrigerator, a tile floor, and a microwave on the table</h6>
+                </div>
+                
+            </div>
+            <div class="col-4">
+                <div class="video-compare-container" style="width: 100%">
+                    <video class="video lazy" loop playsinline autoplay muted style="width: 100%">
+                        <source data-src="dowm/livingroom.mp4" type="video/mp4"></source>
+                    </video>
+                    <h6 class="caption">A living room has a coffee table with a basket on it, a wooden floor, a TV on a TV stand, and a sofa with an astronaut sitting on it</h6>
+                </div>
+                
+            </div>
+            <div class="col-4">
+                <div class="video-compare-container" style="width: 100%">
+                    <video class="video lazy" loop playsinline autoplay muted style="width: 100%">
+                        <source data-src="dowm/model.mp4" type="video/mp4"></source>
+                    </video>
+                    <h6 class="caption">A table with models of teddy bears, marlin (clown fish), Hello Kitty, Mickey Mouse, Stitch, Snoopy, Donald Duck, Santa Claus, SpongeBob SquarePants, and Patrick Star in the shape of a heart</h6>
+                </div>
+                
+            </div>
+            <div class="col-4">
+                <div class="video-compare-container" style="width: 100%">
+                    <video class="video lazy" loop playsinline autoplay muted style="width: 100%">
+                        <source data-src="dowm/octopus.mp4" type="video/mp4"></source>
+                    </video>
+                    <h6 class="caption">An octopus playing the piano</h6>
+                </div>
+                
+            </div>
+            <div class="col-4">
+                <div class="video-compare-container" style="width: 100%">
+                    <video class="video lazy" loop playsinline autoplay muted style="width: 100%">
+                        <source data-src="dowm/pandas.mp4" type="video/mp4"></source>
+                    </video>
+                    <h6 class="caption">Panda in a wizard hat sitting on a Victorian-style wooden chair and looking at a Ficus in a pot</h6>
+                </div>
+                
+            </div>
+            <div class="col-4">
+                <div class="video-compare-container" style="width: 100%">
+                    <video class="video lazy" loop playsinline autoplay muted style="width: 100%">
+                        <source data-src="dowm/playground.mp4" type="video/mp4"></source>
+                    </video>
+                    <h6 class="caption">An amusement park swing, a seesaw, a street lamp on the grass</h6>
+                </div>
+                
+            </div>
+            <!-- <div class="col-4">
+                <div class="video-compare-container" style="width: 100%">
+                    <video class="video lazy" loop playsinline autoplay muted style="width: 100%">
+                        <source data-src="dowm/puppy.mp4" type="video/mp4"></source>
+                    </video>
+                    <h6 class="caption">A puppy lying on the roof of a car</h6>
+                </div>
+                
+            </div> -->
+            <div class="col-4">
+                <div class="video-compare-container" style="width: 100%">
+                    <video class="video lazy" loop playsinline autoplay muted style="width: 100%">
+                        <source data-src="dowm/rabbit.mp4" type="video/mp4"></source>
+                    </video>
+                    <h6 class="caption">A rabbit eating birthday cake at the dining table</h6>
+                </div>
+            </div>
+        </div>
+        
+    </div>
+
+    
+    <hr class="divider" />
+    <div class="container" style="max-width: 768px;">
+        <div class="row">
+            <div class="col-sm-12">
+                <h2>Scene Editing</h2>
+                <p>Editing scenes using prompt.</p>
+            </div>
+        </div>
+
+        <div class="row captioned_videos">
+            <div class="col-3">
+                <div class="video-compare-container" style="width: 100%">
+                    <video class="video lazy" loop playsinline autoplay muted style="width: 100%">
+                        <source data-src="./edit/1.mp4" type="video/mp4"></source>
+                    </video>
+                    <h6 class="caption">A living room has a coffee table with a basket on it, a wooden floor, a TV on a TV stand, and a sofa with an astronaut sitting on it</h6>
+                </div>
+            </div>
+            <div class="col-3">
+                <div class="video-compare-container" style="width: 100%">
+                    <video class="video lazy" loop playsinline autoplay muted style="width: 100%">
+                        <source data-src="./edit/2.mp4" type="video/mp4"></source>
+                    </video>
+                    <h6 class="caption">Put a cardboard box next to the coffee table</h6>
+                </div>
+            </div>
+            <div class="col-3">
+                <div class="video-compare-container" style="width: 100%">
+                    <video class="video lazy" loop playsinline autoplay muted style="width: 100%">
+                        <source data-src="./edit/3.mp4" type="video/mp4"></source>
+                    </video>
+                    <h6 class="caption">Move the cardboard box on top of the TV</h6>
+                </div>
+            </div>
+            <div class="col-3">
+                <div class="video-compare-container" style="width: 100%">
+                    <video class="video lazy" loop playsinline autoplay muted style="width: 100%">
+                        <source data-src="./edit/4.mp4" type="video/mp4"></source>
+                    </video>
+                    <h6 class="caption">Replace the cardboard box with a gift box</h6>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- <hr class="divider" />
+    <section class="section" id="More Research">
+        <div class="container" style="max-width: 768px;">
+          <h2 class="title">More Research</h2>
+          <span class="author-block" style="font-size: 20px;">
+            <a class="navbar-item" href="https://jaminfong.cn/neusample/">
+                NeuSample,
+              </a>
+              <a class="navbar-item" href="https://jaminfong.cn/tineuvox/">
+                TiNeuVox,
+              </a>
+              <a class="navbar-item" href="https://taoranyi.com/gneuvox/">
+                GNeuVox,
+               </a>
+              <a class="navbar-item" href="https://jumpat.github.io/SA3D/">
+                Segment Anything in 3D with NeRFs,
+              </a>
+              <a class="navbar-item" href="https://guanjunwu.github.io/4dgs/">
+                4D-GS
+              </a>
+            </span>
+        </div>
+    </section>
+
+    <hr class="divider" />
+    <section class="section" id="BibTeX">
+        <div class="container" style="max-width: 768px;">
+          <h2 class="title">BibTeX</h2>
+          <pre><code>
+@article{yi2023gaussiandreamer,
+  title={GaussianDreamer: Fast Generation from Text to 3D Gaussians by Bridging 2D and 3D Diffusion Models},
+  author={Yi, Taoran and Fang, Jiemin and Wang, Junjie and Wu, Guanjun and Xie, Lingxi and Zhang, Xiaopeng and Liu, Wenyu and Tian, Qi and Wang, Xinggang},
+  journal={arXiv preprint arXiv:2310.08529},
+  year={2023}
+}
+          </code></pre>
+        </div>
+    </section> -->
+
+    <style>
+        footer {
+            padding-top: 80px;
+            padding-bottom: 1px;
+        }
+    </style>
+
+    <div class="container" style="max-width: 768px;">
+        <footer>
+            <p> Website template from <a href="https://taoranyi.com/gaussiandreamer/">gaussiandreamer</a>. We thank the authors for the open-source code.</p>
+        </footer>
+    </div>
+
+
+
+    <script src="https://polyfill.io/v3/polyfill.js?features=IntersectionObserver"></script>
+    <script src="assets/js/yall.js"></script>
+    <script>
+        yall(
+            {
+                observeChanges: true
+            }
+        );
+    </script>
+    <script src="assets/js/scripts.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/js/bootstrap.bundle.min.js"></script>
+    <script src="https://uploads-ssl.webflow.com/51e0d73d83d06baa7a00000f/js/webflow.fd002feec.js"></script>
+    <!-- Import the component -->
+</body>
+
+</html>
