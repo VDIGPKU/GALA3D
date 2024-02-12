@@ -1,5 +1,7 @@
-### Hi there 👋
-#### This is a repository of the website for "GALA3D: Towards Complex Text-to-3D Generation via Generative Layout-guided Gaussian Splatting".
+### GALA3D 👋
+#### This is the official implementation of "GALA3D: Towards Text-to-3D Complex Scene Generation via Layout-guidedGenerative Gaussian Splatting".
+
+#### Code: coming soon.
 <!--
 **gala3d/gala3d** is a ✨ _special_ ✨ repository because its `README.md` (this file) appears on your GitHub profile.
 
