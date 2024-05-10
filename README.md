@@ -8,7 +8,7 @@ This is the official implementation of **GALA3D: Towards Text-to-3D Complex Scen
 Authors: [Xiaoyu Zhou📧](xyrain.zhou@gmail.com), [Xingjian Ran📧]((xyrain.zhou@gmail.com)), [Xiongya Jiao📧](asdlkj@stu.pku.edu.cn), [Jinlin He📧](jerraonhe@gmail.com), [Zhiwei Lin📧](zwlin@pku.edu.cn), [Yongtao Wang📧](wyt@pku.edu.cn), [Deqing Sun📧](deqingsun@gmail.com), [Ming-Hsuan Yang📧](minghsuanyang@gmail.com)
 
 ## Update
-* 2024/05/11 - Code: please sign the [application]() to obtain the code
+* 2024/05/11 - Code: please sign the [application](https://github.com/VDIGPKU/GALA3D/blob/main/GALA3D%20Application.docx) to obtain the code
 * 2024/05/02 - Paper: Accepted by ICML2024👏
 
 ## License
