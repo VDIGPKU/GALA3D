@@ -12,7 +12,13 @@ Authors: [Xiaoyu Zhou📧](xyrain.zhou@gmail.com), [Xingjian Ran📧]((xyrain.zh
 * 2024/05/02 - Paper: Accepted by ICML2024👏
 
 ## Demo
-<img src="https://github.com/VDIGPKU/GALA3D/blob/main/assets/gif/1.gif" width="200"/><img src="https://github.com/VDIGPKU/GALA3D/blob/main/assets/gif/1.gif" width="200"/><img src="https://github.com/VDIGPKU/GALA3D/blob/main/assets/gif/1.gif" width="200"/>
+<img src="https://github.com/VDIGPKU/GALA3D/blob/main/assets/gif/1.gif" width="200"/><img src="https://github.com/VDIGPKU/GALA3D/blob/main/assets/gif/2.gif" width="200"/><img src="https://github.com/VDIGPKU/GALA3D/blob/main/assets/gif/3.gif" width="200"/>
+
+<img src="https://github.com/VDIGPKU/GALA3D/blob/main/assets/gif/4.gif" width="200"/><img src="https://github.com/VDIGPKU/GALA3D/blob/main/assets/gif/5.gif" width="200"/><img src="https://github.com/VDIGPKU/GALA3D/blob/main/assets/gif/6.gif" width="200"/>
+
+<img src="https://github.com/VDIGPKU/GALA3D/blob/main/assets/gif/7.gif" width="200"/><img src="https://github.com/VDIGPKU/GALA3D/blob/main/assets/gif/8.gif" width="200"/><img src="https://github.com/VDIGPKU/GALA3D/blob/main/assets/gif/9.gif" width="200"/>
+
+<img src="https://github.com/VDIGPKU/GALA3D/blob/main/assets/gif/10.gif" width="200"/><img src="https://github.com/VDIGPKU/GALA3D/blob/main/assets/gif/11.gif" width="200"/><img src="https://github.com/VDIGPKU/GALA3D/blob/main/assets/gif/12.gif" width="200"/>
 
 ## License
 The project is only free for academic research purposes, but needs authorization forcommerce. For commerce permission, please contact wyt@pku.edu.cn.
