@@ -12,7 +12,7 @@ Authors: [Xiaoyu Zhou📧](xyrain.zhou@gmail.com), [Xingjian Ran📧]((xyrain.zh
 * 2024/05/02 - Paper: Accepted by ICML2024👏
 
 ## Demo
-![A living room has a coffee table with a basket on it, a wooden floor, a TV on a TV stand, and a sofa with an astronaut sitting on it]()
+![A living room has a coffee table with a basket on it, a wooden floor, a TV on a TV stand, and a sofa with an astronaut sitting on it](https://github.com/VDIGPKU/GALA3D/blob/main/assets/gif/1.gif)
 
 ## License
 The project is only free for academic research purposes, but needs authorization forcommerce. For commerce permission, please contact wyt@pku.edu.cn.
