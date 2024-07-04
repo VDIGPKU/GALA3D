@@ -12,10 +12,7 @@ Authors: [Xiaoyu Zhou📧](xyrain.zhou@gmail.com), [Xingjian Ran📧]((xyrain.zh
 * 2024/05/02 - Paper: Accepted by ICML2024👏
 
 ## Demo
-
-<center class="half">
-  <img src="https://github.com/VDIGPKU/GALA3D/blob/main/assets/gif/1.gif" width="200"/><img src="https://github.com/VDIGPKU/GALA3D/blob/main/assets/gif/1.gif" width="200"/><img src="https://github.com/VDIGPKU/GALA3D/blob/main/assets/gif/1.gif" width="200"/>
-</center>
+<img src="https://github.com/VDIGPKU/GALA3D/blob/main/assets/gif/1.gif" width="200"/><img src="https://github.com/VDIGPKU/GALA3D/blob/main/assets/gif/1.gif" width="200"/><img src="https://github.com/VDIGPKU/GALA3D/blob/main/assets/gif/1.gif" width="200"/>
 
 ## License
 The project is only free for academic research purposes, but needs authorization forcommerce. For commerce permission, please contact wyt@pku.edu.cn.
