@@ -29,7 +29,6 @@ Authors: [Xiaoyu Zhou](xyrain.zhou@gmail.com), Xingjian Ran, Xiongya Jiao, Jinli
   journal={arXiv preprint arXiv:2402.07207},
   year={2024}
 }
-}
 ```
 
 
